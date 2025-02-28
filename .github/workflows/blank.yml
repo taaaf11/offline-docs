@@ -64,7 +64,6 @@ jobs:
           args: zip -qq -r ${{ steps.get-req-tag.outputs.tag }}.zip required-docs-build
 
       - name: Archive Release
-
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "${{ steps.get-req-tag.outputs.tag }}.zip"
