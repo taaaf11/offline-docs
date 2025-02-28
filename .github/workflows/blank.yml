@@ -57,20 +57,14 @@ jobs:
           ln -s .venv/lib/python*/site-packages/pydantic_settings pydantic_settings
           ln -s .venv/lib/python*/site-packages/pydantic_extra_types pydantic_extra_types
           
-          python3 -m uv run --no-sync mkdocs build -d docs-build
+          python3 -m uv run --no-sync mkdocs build -d required-docs-build
       
       - uses: montudor/action-zip@v1
         with:
-          args: zip -qq -r ${{ steps.get-req-tag.outputs.tag }}.zip docs-build
-          
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          ls -l
-          python3 -m pip install .[doc]
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          args: zip -qq -r ${{ steps.get-req-tag.outputs.tag }}.zip required-docs-build
 
-      # - name: Install required packages
-      # - run: |
-      #     python3 -m pip install pydantic 
+      - name: Archive Release
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "${{ steps.get-req-tag.outputs.tag }}.zip"
