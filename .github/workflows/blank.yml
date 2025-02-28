@@ -72,6 +72,7 @@ jobs:
 
       - uses: ncipollo/release-action@v1
         with:
+          name: ${{ steps.get-req-tag.outputs.tag }}
           artifacts: ${{ steps.get-req-tag.outputs.tag }}-docs.zip
           # satisfaction of tag requirement
           commit: main
