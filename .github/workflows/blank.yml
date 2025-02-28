@@ -70,5 +70,6 @@ jobs:
         with:
           artifacts: ${{ steps.get-req-tag.outputs.tag }}-docs.zip
           # satisfaction of tag requirement
+          commit: main
           tag: v0.0.${{ github.run_number }}
 
