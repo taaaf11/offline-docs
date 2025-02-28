@@ -61,12 +61,12 @@ jobs:
       
       - uses: montudor/action-zip@v1
         with:
-          args: zip -qq -r ${{ steps.get-req-tag.outputs.tag }}.zip required-docs-build
+          args: zip -qq -r ${{ steps.get-req-tag.outputs.tag }}-docs.zip required-docs-build
 
       - name: check files
         run: ls -l
 
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "${{ steps.get-req-tag.outputs.tag }}.zip"
+          artifacts: ${{ steps.get-req-tag.outputs.tag }}-docs.zip
 
