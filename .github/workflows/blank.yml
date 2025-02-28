@@ -22,10 +22,16 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+
+      - name: Get required tag
+        id: get-req-tag
+        run: echo tag=$(cat tag) >> "$GITHUB_OUTPUT"
+        
       - uses: actions/checkout@main
         with:
           name: pydantic/pydantic
-          ref: refs/heads/release
+          # ref: refs/heads/release
+          ref: ${{ steps.get-req-tag.outputs.tag }}
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
